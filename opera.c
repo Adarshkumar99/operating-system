@@ -26,4 +26,47 @@ int main()
             if(pr[j]<pr[pos])
               pos=j;
         }
+      
+        tem=pr[i];
+        pr[i]=pr[pos];
+        pr[pos]=tem;
+ 
+        tem=bst[i];
+        bst[i]=bst[pos];
+        bst[pos]=tem;
+ 
+        tem=p[i];
+        p[i]=p[pos];
+        p[pos]=tem;
+    }
+ 
+    waitt[0]=0;	
+ 
+    for(i=1;i<n;i++)
+    {
+        waitt[i]=0;
+        for(j=0;j<i;j++)
+            waitt[i]+=bst[j];
+ 
+        tot+=waitt[i];
+    }
+ 
+    avg_wait=tot/n;      
+    tot=0;
+ 
+    printf("\nProcess\t    Burst Time    \tWaiting Time\tTurnaround Time");
+    for(i=0;i<n;i++)
+    {
+        tat[i]=bst[i]+waitt[i];     
+        tot+=tat[i];
+        printf("\nP[%d]\t\t  %d\t\t    %d\t\t\t%d",p[i],bst[i],waitt[i],tat[i]);
+    }
+ 
+    avg_tat=tot/n; 
+    printf("\n\nAverage waiting time=%d",avg_wait);
+    printf("\nAverage turnaround time=%d\n",avg_tat);
+ 
+	return 0;
+}
+      
     
